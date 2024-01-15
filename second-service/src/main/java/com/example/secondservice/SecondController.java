@@ -10,6 +10,6 @@ public class SecondController {
 
     @GetMapping("/welcome")
     public String welcome() {
-        return "hi";
+        return "hi-second";
     }
 }

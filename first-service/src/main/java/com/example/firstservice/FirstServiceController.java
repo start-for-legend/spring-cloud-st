@@ -10,6 +10,6 @@ public class FirstServiceController {
 
     @GetMapping("/welcome")
     public String welcome() {
-        return "hi";
+        return "hi-first";
     }
 }
