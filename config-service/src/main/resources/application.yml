@@ -4,8 +4,12 @@ server:
 spring:
   application:
     name: config-server
+  profiles:
+    active: native
   cloud:
     config:
       server:
+        native:
+          search-locations: file:/C:/git-local-native-repo-cloud
         git:
           uri: file://C:\git-local-repo-cloud
