@@ -1,6 +1,7 @@
 package com.example.cloudgateway.filter;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHeaders;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.security.Key;
 import java.util.Objects;
 
 @Slf4j
@@ -49,9 +51,12 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
         boolean returnValue = true;
         String subject = null;
 
+        final Key key;
+        key = Keys.hmacShaKeyFor(Objects.requireNonNull(env.getProperty("token.secret")).getBytes());
+
         try {
             subject = Jwts.parserBuilder()
-                    .setSigningKey(env.getProperty("token.secret"))
+                    .setSigningKey(key)
                     .build()
                     .parseClaimsJws(jwt)
                     .getBody().getSubject();
