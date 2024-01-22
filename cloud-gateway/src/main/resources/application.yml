@@ -12,6 +12,12 @@ spring:
   application:
     name: cloud-gateway-service
 
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
   config:
     import: optional:configserver:http://localhost:8888
 
@@ -94,11 +100,8 @@ spring:
                 preLogger: true
                 postLogger: true
 
-token:
-  secret: user_token
-
 management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans, httptrace
+        include: refresh, health, beans, httptrace, busrefresh
