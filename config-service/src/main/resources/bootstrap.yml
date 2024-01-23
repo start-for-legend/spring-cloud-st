@@ -1,2 +1,6 @@
 encrypt:
-  key: blohny
+#  key: blohny
+  key-store:
+    location: file:C:\keystore\apiEncryptionKey.jks
+    password: zadzed1100!
+    alias: apiEncryptionKey
