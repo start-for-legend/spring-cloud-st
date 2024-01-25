@@ -35,7 +35,7 @@ public class Order implements Serializable {
     @Column(nullable = false, unique = true)
     private String orderId;
 
-    @Column(nullable = false, updatable = false, insertable = false)
+    @Column(updatable = false, insertable = false)
     @CreationTimestamp
     private Date createdAt;
 }
