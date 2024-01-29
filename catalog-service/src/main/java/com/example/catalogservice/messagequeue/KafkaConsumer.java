@@ -40,7 +40,7 @@ public class KafkaConsumer {
         } else {
             log.error("Catalog Is Null");
         }
-        
+
         catalogRepository.save(Objects.requireNonNull(catalog));
     }
 }
