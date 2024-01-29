@@ -4,6 +4,7 @@ import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.dto.RequestOrder;
 import com.example.orderservice.dto.ResponseOrder;
 import com.example.orderservice.entity.Order;
+import com.example.orderservice.messageQueue.KafkaProducer;
 import com.example.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,6 +24,7 @@ public class OrderController {
 
     private final Environment env;
     private final OrderService orderService;
+    private final KafkaProducer kafkaProducer;
 
     @GetMapping("/health_check")
     public String status() {
@@ -33,9 +35,15 @@ public class OrderController {
     public ResponseEntity<HttpStatus> createOrder(@PathVariable String userId, @RequestBody RequestOrder orderRequest) {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+        /* jpa */
         OrderDto orderDto = modelMapper.map(orderRequest, OrderDto.class);
         orderDto.setUserId(userId);
         orderService.createOrder(orderDto);
+
+        /* send this order to the kafka */
+        kafkaProducer.send("example-catalog-topic", orderDto);
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
