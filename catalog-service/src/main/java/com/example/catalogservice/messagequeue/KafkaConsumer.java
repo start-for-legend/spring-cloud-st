@@ -34,7 +34,7 @@ public class KafkaConsumer {
             throw new RuntimeException(e);
         }
 
-        Catalog catalog = catalogRepository.findByProductId((String)map.get("productID"));
+        Catalog catalog = catalogRepository.findByProductId((String)map.get("productId"));
         if (catalog != null) {
             catalog.setStock(catalog.getStock() - (Integer) map.get("qty"));
         } else {
