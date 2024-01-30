@@ -38,6 +38,9 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:3.1.0'
 
     implementation 'org.springframework.kafka:spring-kafka'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin:2.2.3.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
 }
 
 dependencyManagement {
