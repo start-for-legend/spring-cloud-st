@@ -7,10 +7,12 @@ spring:
 
   zipkin:
     base-url: http://127.0.0.1:9411
+    sender:
+      type: web
     enabled: true
   sleuth:
     sampler:
-      probability: 1.0
+      probability: 1
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,7 +21,7 @@ spring:
     password: ${DB_PASSWORD}
 
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: create
 
