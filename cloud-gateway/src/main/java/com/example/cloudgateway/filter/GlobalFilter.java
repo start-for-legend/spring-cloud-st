@@ -23,6 +23,12 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
             ServerHttpRequest request = exchange.getRequest();
             ServerHttpResponse response = exchange.getResponse();
 
+            log.info("Grafana인가? : " + request.getId());
+            log.info("Grafana인가? : " + request.getPath());
+            log.info("Grafana인가? : " + request.getMethod());
+            log.info("Grafana인가? : " + request.getLocalAddress());
+            log.info("Grafana인가? : " + request.getURI());
+
             log.info("Global Filter baseMessage : {}", config.getBaseMessage());
 
             if (config.isPreLogger()) {
