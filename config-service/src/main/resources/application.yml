@@ -15,7 +15,9 @@ spring:
     config:
       server:
         git:
-          uri: file://C:\git-local-repo-cloud
+          uri: https://github.com/BLoHny/config-yml
+          username: ""
+          password: ""
 
 management:
   endpoints:
